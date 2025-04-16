@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Revisión de Solicitud</h2>
+
+<p><strong>ID:</strong> {{ data.idSolicitud }}</p>
+<p><strong>Descripción:</strong> {{ data.descripcion }}</p>
+<p><strong>Monto:</strong> ${{ data.monto }}</p>
+<p><strong>Fecha Esperada:</strong> {{ data.fechaEsperada }}</p>
+
+<form [formGroup]="form" class="form-container">
+  <mat-form-field class="full-width">
+    <mat-label>Comentario</mat-label>
+    <textarea matInput formControlName="comentario"></textarea>
+    <mat-error *ngIf="form.get('comentario')?.hasError('required')">
+      El comentario es obligatorio para montos mayores a $5000.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="button-container">
+    <button mat-flat-button color="primary" (click)="aprobar()">Aprobar</button>
+    <button mat-flat-button color="warn" (click)="rechazar()">Rechazar</button>
+    <button mat-stroked-button type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+</form>

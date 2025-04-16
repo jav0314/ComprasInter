@@ -1,0 +1,72 @@
+<h2>Solicitudes Pendientes</h2>
+
+<table mat-table [dataSource]="solicitudesPendientes" class="mat-elevation-z2">
+  <ng-container matColumnDef="idSolicitud">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let s">{{ s.idSolicitud }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef>Descripción</th>
+    <td mat-cell *matCellDef="let s">{{ s.descripcion }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="monto">
+    <th mat-header-cell *matHeaderCellDef>Monto</th>
+    <td mat-cell *matCellDef="let s">{{ s.monto }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaEsperada">
+    <th mat-header-cell *matHeaderCellDef>Fecha Esperada</th>
+    <td mat-cell *matCellDef="let s">{{ s.fechaEsperada }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="estadoSolicitud">
+    <th mat-header-cell *matHeaderCellDef>Estado Solicitud</th>
+    <td mat-cell *matCellDef="let s">{{ s.estadoSolicitud }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let s">
+      <button mat-icon-button color="primary" (click)="abrirModalAprobarRechazar(s)">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['idSolicitud', 'descripcion','estadoSolicitud', 'monto', 'fechaEsperada', 'acciones']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['idSolicitud', 'descripcion','estadoSolicitud', 'monto', 'fechaEsperada', 'acciones']"></tr>
+</table>
+
+<h2 style="margin-top: 40px;">Historial de Solicitudes Aprobadas</h2>
+
+<table mat-table [dataSource]="aprobadas" class="mat-elevation-z2">
+  <ng-container matColumnDef="idSolicitud">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let s">{{ s.idSolicitud }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef>Descripción</th>
+    <td mat-cell *matCellDef="let s">{{ s.descripcion }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="monto">
+    <th mat-header-cell *matHeaderCellDef>Monto</th>
+    <td mat-cell *matCellDef="let s">{{ s.monto }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaEsperada">
+    <th mat-header-cell *matHeaderCellDef>Fecha Esperada</th>
+    <td mat-cell *matCellDef="let s">{{ s.fechaEsperada }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="comentario">
+    <th mat-header-cell *matHeaderCellDef>Comentario</th>
+    <td mat-cell *matCellDef="let s">{{ s.comentario }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['idSolicitud', 'descripcion', 'monto', 'fechaEsperada', 'comentario']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['idSolicitud', 'descripcion', 'monto', 'fechaEsperada', 'comentario']"></tr>
+</table>

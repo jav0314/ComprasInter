@@ -1,17 +1,27 @@
-<h2 mat-dialog-title style="margin: 20px">Editar Información</h2>
+<h2 mat-dialog-title style="margin: 20px">Editar Solicitud</h2>
+
 <form [formGroup]="editForm" (ngSubmit)="onSave()" class="edit-form">
   <mat-form-field class="full-width">
-    <mat-label>ID</mat-label>
-    <input matInput formControlName="id" readonly="true" />
+    <mat-label>ID Solicitud</mat-label>
+    <input matInput formControlName="idSolicitud" readonly />
   </mat-form-field>
+
   <mat-form-field class="full-width">
-    <mat-label>Nombre</mat-label>
-    <input matInput formControlName="name" />
+    <mat-label>Descripción</mat-label>
+    <input matInput formControlName="descripcion" />
   </mat-form-field>
+
   <mat-form-field class="full-width">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" />
+    <mat-label>Monto</mat-label>
+    <input matInput type="number" formControlName="monto" />
   </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Fecha Esperada</mat-label>
+    <input matInput type="date" formControlName="fechaEsperada" />
+  </mat-form-field>
+  
+
   <div class="button-container">
     <button mat-flat-button class="button" type="submit" color="primary">
       Guardar

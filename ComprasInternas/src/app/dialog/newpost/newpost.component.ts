@@ -13,7 +13,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Person } from '../../models/person';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { Solicitud } from '../../models/solicitudes';
@@ -63,8 +62,7 @@ export class NewpostComponent {
           alert('La solicitud fue creada correctamente.');
         },
         error: (err) => {
-          alert('No se pudo crear la solicitud.');
-          console.log(err + 'error');
+          
           this.dialogRef.close('error');
         },
       });

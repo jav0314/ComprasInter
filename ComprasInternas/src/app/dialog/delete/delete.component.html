@@ -1,19 +1,19 @@
-<h2 mat-dialog-title style="margin: 25px">Eliminar Persona</h2>
+<h2 mat-dialog-title style="margin: 25px">Eliminar Solicitud</h2>
 
-<form [formGroup]="deleteForm" (ngSubmit)="deletePerson()" class="delete-form">
+<form [formGroup]="deleteForm" (ngSubmit)="eliminarSolicitud()" class="delete-form">
   <mat-form-field class="full-width">
-    <mat-label>ID</mat-label>
-    <input matInput formControlName="id" readonly="true" appUpperCase />
+    <mat-label>ID Solicitud</mat-label>
+    <input matInput formControlName="idSolicitud" readonly />
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-label>Nombre</mat-label>
-    <input matInput formControlName="name" readonly="true" appUpperCase />
+    <mat-label>Descripción</mat-label>
+    <input matInput formControlName="descripcion" readonly />
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" readonly="true" appUpperCase />
+    <mat-label>Monto</mat-label>
+    <input matInput formControlName="monto" readonly />
   </mat-form-field>
 
   <div class="button-container">

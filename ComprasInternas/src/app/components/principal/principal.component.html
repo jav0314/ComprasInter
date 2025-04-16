@@ -13,6 +13,14 @@
     >
       Nueva Solicitud
     </button>
+    <button 
+      mat-flat-button
+      color="primary"
+      class="new-person-button"
+      (click)="irASupervisor()"
+    >
+      Revisar Solicitudes
+    </button>
 
     <table
       mat-table
@@ -38,7 +46,7 @@
       </ng-container>
 
       <ng-container matColumnDef="monto">
-        <th mat-header-cell *matHeaderCellDef>Fecha de Registro</th>
+        <th mat-header-cell *matHeaderCellDef>Monto $</th>
         <td mat-cell *matCellDef="let element">{{ element.monto }}</td>
       </ng-container>
 
@@ -52,11 +60,6 @@
         <td mat-cell *matCellDef="let element">{{ element.estadoSolicitud }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="idSupervisor">
-        <th mat-header-cell *matHeaderCellDef>Supervisor</th>
-        <td mat-cell *matCellDef="let element">{{ element.idSupervisor }}</td>
-      </ng-container>
-
       <ng-container matColumnDef="comentario">
         <th mat-header-cell *matHeaderCellDef>Comentario</th>
         <td mat-cell *matCellDef="let element">{{ element.comentario }}</td>
@@ -66,21 +69,24 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
         <td mat-cell *matCellDef="let element">
-          <button
+          <!-- <button
             mat-icon-button
             color="primary"
           >
             <mat-icon>info</mat-icon>
-          </button>
+          </button> -->
           <button
             mat-icon-button
             color="accent"
+            (click)="editSolicitud(element.idSolicitud)"
           >
             <mat-icon>edit</mat-icon>
+            
           </button>
           <button
             mat-icon-button
             color="warn"
+            (click)="deletePerson(element.idSolicitud)"
           >
             <mat-icon>delete</mat-icon>
           </button>

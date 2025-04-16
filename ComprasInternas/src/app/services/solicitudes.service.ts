@@ -9,6 +9,7 @@ import { Solicitud } from '../models/solicitudes';
 export class SolicitudesServices {
   private http = inject(HttpClient);
   public apiLink = connectionAPI.apiURL + 'usuario';
+  public apiLinkSupervisor = connectionAPI.apiURL + 'supervisor';
   constructor() {}
 
   detailsGet(idUsuario: number) {
@@ -19,30 +20,35 @@ export class SolicitudesServices {
     const url = `${this.apiLink}/solicitudes`;
     return this.http.post<any>(url, solicitud);
   }
-  /* detailsByIdGet(id: number) {
-    return this.http.get<Person>(`${this.apiLink}/${id}`);
+    editPut(solicitud: Solicitud) {
+    const url = `${this.apiLink}/solicitudes/${solicitud.idSolicitud}`;
+    return this.http.put<any>(url, solicitud);
+    }
+
+  deleteDel(solicitud: Solicitud) {
+    const url = `${this.apiLink}/solicitudes/${solicitud.idSolicitud}?idUsuario=${solicitud.idUsuario}`;
+    return this.http.delete<any>(url);
   }
-
-
-  deleteDel(id: number) {
-    return this.http.delete<any>(`${this.apiLink}/${id}`);
+  getSolicitudesPendientes() {
+    const url = `${this.apiLinkSupervisor}/solicitudes`;
+    return this.http.get<Solicitud[]>(`${url}`);
   }
-
-  editPut(person: Person) {
-    return this.http.put<any>(`${this.apiLink}/${person.id}`, person);
+  
+  aprobarSolicitud(solicitud: Solicitud) {
+    const url = `${this.apiLinkSupervisor}/solicitudes/${solicitud.idSolicitud}/aprobar`;
+    return this.http.put<any>(url, solicitud);
   }
-
-  filterId(id: number) {
-    return this.http.get<Person>(`${this.apiLink}/id/${id}`);
+  
+  rechazarSolicitud(solicitud: Solicitud) {
+    const url = `${this.apiLinkSupervisor}/solicitudes/${solicitud.idSolicitud}/rechazar`;
+    return this.http.put<any>(url, solicitud);
   }
-
-  filterName(name: string) {
-    return this.http.get<Person[]>(`${this.apiLink}/name/${name}`);
+  
+  getSolicitudesAprobadas() {
+    const url = `${this.apiLinkSupervisor}/solicitudes/solicitudes/aprobadas`;
+    return this.http.get<Solicitud[]>(url);
   }
-
-  filterDate(dateFrom: string, dateTo: string) {
-    return this.http.get<Person[]>(
-      `${this.apiLink}/date/${dateFrom}/${dateTo}`
-    );
-  } */
+  
+  
+ 
 }
