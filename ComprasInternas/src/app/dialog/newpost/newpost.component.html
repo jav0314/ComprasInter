@@ -1,0 +1,26 @@
+<h2 mat-dialog-title class="dialog-title">Nueva Solicitud</h2>
+
+<form [formGroup]="SolicitudForm" (ngSubmit)="onSubmit()" class="edit-form">
+  <mat-form-field class="full-width">
+    <mat-label>Descripción</mat-label>
+    <input matInput formControlName="descripcion" />
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Monto</mat-label>
+    <input matInput type="number" formControlName="monto" />
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Fecha Esperada</mat-label>
+    <input matInput type="date" formControlName="fechaEsperada" />
+  </mat-form-field>
+
+
+  <div class="button-container">
+    <button mat-flat-button color="primary" type="submit">Guardar</button>
+    <button mat-flat-button color="warn" type="button" (click)="onCancel()">
+      Cancelar
+    </button>
+  </div>
+</form>

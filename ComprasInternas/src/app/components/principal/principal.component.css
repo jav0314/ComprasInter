@@ -1,0 +1,40 @@
+.user-list-card {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border-radius: 12px;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.new-person-button {
+  background-color: #7c4dff;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.mat-header-cell {
+  color: #b0bec5;
+  font-weight: 600;
+  background-color: #1f1f1f;
+}
+
+.mat-row:hover {
+  background-color: #37474f;
+}
+
+.mat-icon-button[color="primary"] {
+  color: #2196f3;
+}
+
+.mat-icon-button[color="accent"] {
+  color: #4caf50; 
+}
+
+.mat-icon-button[color="warn"] {
+  color: #f44336; 
+}

@@ -1,0 +1,212 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+// import { PersonService } from '../../service/person.service';
+// import { Person } from '../../models/person';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+// import { DetailsComponent } from '../../dialog/details/details.component';
+// import { EditComponent } from '../../dialog/edit/edit.component';
+// import { NewpostComponent } from '../../dialog/newpost/newpost.component';
+// import { DeleteComponent } from '../../dialog/delete/delete.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import dayjs from 'dayjs';
+import { PersonService } from '../../services/person.service';
+import { Person } from '../../models/person';
+import { Solicitud } from '../../models/solicitudes';
+import { SolicitudesServices } from '../../services/solicitudes.service';
+import { NewpostComponent } from '../../dialog/newpost/newpost.component';
+
+@Component({
+  selector: 'app-principal',
+  standalone: true,
+  imports: [
+    MatTableModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    CommonModule,
+    // NumberDirective,
+    // TextDirective,
+    // disableInputDirective,
+    MatNativeDateModule,
+    MatDatepickerModule,
+  ],
+  templateUrl: './principal.component.html',
+  styleUrls: ['./principal.component.css'],
+})
+export class PrincipalComponent implements OnInit {
+  private solicitudService = inject(SolicitudesServices);
+  public listaSolicitud: Solicitud[] = [];
+  public displayedColumns: string[] = [
+    'idSolicitud',
+    'idUsuario',
+    'descripcion',
+    'monto',
+    'fechaEsperada',
+    'estadoSolicitud',
+    'idSupervisor',
+    'comentario',
+    'action',
+  ];
+  
+ 
+  constructor(private dialog: MatDialog) {}
+
+  ngOnInit() {
+    this.getList(1);
+  }
+
+  getList(id : number) {
+    this.solicitudService.detailsGet(id).subscribe({
+      next: (data) => {
+        if (data.length > 0) {
+          this.listaSolicitud = data.map((solicitudes) => ({
+            ...solicitudes,          
+          }));
+        }
+      },
+      error: (err) => {
+        console.log(err + 'error');
+      },
+    });
+  }
+
+  /* detailsPerson(id: number) {
+    this.personService.detailsByIdGet(id).subscribe({
+      next: (data) => {
+        const formattedPerson = {
+          ...data,
+        };
+        this.openInfoDialog(formattedPerson);
+      },
+      error: (err) => {
+        console.log(err + 'error');
+      },
+    });
+  } */
+
+  // openInfoDialog(person: Person): void {
+  //   this.dialog.open(DetailsComponent, {
+  //     data: person,
+  //   });
+  // }
+
+  /* editPerson(id: number) {
+    const person = this.listaPerson.find((p) => p.id === id);
+    if (person) {
+      this.dialog
+        .open(EditComponent, {
+          data: person,
+        })
+        .afterClosed()
+        .subscribe((result) => {
+          if (result === 'success') {
+            this.getList();
+          }
+        });
+    }
+  } */
+
+  /* deletePerson(id: number) {
+    const person = this.listaPerson.find((p) => p.id === id);
+    if (person) {
+      this.dialog
+        .open(DeleteComponent, {
+          data: person,
+        })
+        .afterClosed()
+        .subscribe((result) => {
+          this.getList();
+        });
+    }
+  } */
+
+  openNewPostDialog(): void {
+    const dialogRef = this.dialog.open(NewpostComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'success') {
+        this.getList(1);
+      }
+    });
+  }
+
+
+
+  /* filterById(): void {
+    const searchValue = this.searchControl.value?.trim();
+    if (searchValue === '') {
+      this.getList();
+    } else {
+      const id = Number(searchValue);
+      if (!isNaN(id)) {
+        this.personService.filterId(id).subscribe({
+          next: (data: Person) => (this.listaPerson = [data]),
+          error: (error) => {
+            this.getList();
+            console.error('Error al buscar el usuario:', error);
+          },
+        });
+      } else {
+        console.error('El valor ingresado no es un número válido.');
+      }
+    }
+  }
+  filterByName(): void {
+    const searchValue = this.searchControl2.value?.trim() ?? '';
+    if (searchValue === '') {
+      this.getList();
+    } else {
+      this.personService.filterName(searchValue).subscribe({
+        next: (data: Person[]) => {
+          this.listaPerson = data;
+        },
+        error: (error) => {
+          this.getList();
+          console.error('Error al buscar el usuario:', error);
+        },
+      });
+    }
+  } */
+
+  /* filterByCreateDate(): void {
+    const dateFrom = dayjs(this.searchControl3.value).format('DD-MM-YYYY');
+    //console.log(dateFrom);
+    const dateTo = dayjs(this.searchControl4.value).format('DD-MM-YYYY');
+    //console.log(dateTo);
+
+    if (!dateFrom && !dateTo) {
+      this.getList();
+      return;
+    } else
+      this.personService.filterDate(dateFrom, dateTo).subscribe({
+        next: (data: Person[]) => {
+          //console.log(data);
+          this.listaPerson = data.map((person) => ({
+            ...person,
+            createDate: dayjs(person.createDate).format(
+              'DD-MM-YYYY hh:mm:ss a'
+            ),
+          }));
+        },
+        error: (error) => {
+          this.getList();
+          console.error('Error al buscar el usuario:', error);
+        },
+      });
+  } */
+
+}

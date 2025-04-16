@@ -1,0 +1,94 @@
+<mat-card class="user-list-card">
+  <mat-card-header>
+    <h1 class="card-title">Lista de Solicitudes</h1>
+  </mat-card-header>
+  <mat-card-content>
+    
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="new-person-button"
+      (click)="openNewPostDialog()"
+    >
+      Nueva Solicitud
+    </button>
+
+    <table
+      mat-table
+      [dataSource]="listaSolicitud"
+      class="mat-elevation-z2 user-table"
+    >
+      <!-- ID Column -->
+      <ng-container matColumnDef="idSolicitud">
+        <th mat-header-cell *matHeaderCellDef># ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.idSolicitud }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="idUsuario">
+        <th mat-header-cell *matHeaderCellDef># ID Usuario</th>
+        <td mat-cell *matCellDef="let element">{{ element.idUsuario }}</td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+        <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="monto">
+        <th mat-header-cell *matHeaderCellDef>Fecha de Registro</th>
+        <td mat-cell *matCellDef="let element">{{ element.monto }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="fechaEsperada">
+        <th mat-header-cell *matHeaderCellDef>Fecha Esperada</th>
+        <td mat-cell *matCellDef="let element">{{ element.fechaEsperada }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="estadoSolicitud">
+        <th mat-header-cell *matHeaderCellDef>Estado solicitud</th>
+        <td mat-cell *matCellDef="let element">{{ element.estadoSolicitud }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="idSupervisor">
+        <th mat-header-cell *matHeaderCellDef>Supervisor</th>
+        <td mat-cell *matCellDef="let element">{{ element.idSupervisor }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="comentario">
+        <th mat-header-cell *matHeaderCellDef>Comentario</th>
+        <td mat-cell *matCellDef="let element">{{ element.comentario }}</td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-icon-button
+            color="primary"
+          >
+            <mat-icon>info</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="accent"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
